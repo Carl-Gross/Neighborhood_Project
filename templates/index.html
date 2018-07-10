@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Littleton Restaurants</title>
+    <link rel=stylesheet type=text/css href="{{url_for('static', filename='styles.css')}}">
+</head>
+<body>
+    <div id="pane">
+        <h1>Littleton Restaurants</h1>
+        <img src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Menu2-512.png" id="hamburger" class="burger">
+        <div id="filter_area">
+            <h2 id="filter_title">Filter</h2>
+            <select id="filter" data-bind="value: curRating">
+                <option value=1>1 star or greater</option>
+                <option value=2>2 stars or greater</option>
+                <option value=3>3 stars or greater</option>
+                <option value=4>4 stars or greater</option>
+                <option value=4.5>4.5 stars or greater</option>
+            </select>
+        </div>
+        <h2 id="list_title">Restaurant List</h2>
+        <ul data-bind="foreach: places">
+            <!-- ko if: visible -->
+            <li data-bind="text: name, click: $parent.highlightMarker" ></li>
+            <!-- /ko -->
+        </ul>
+    </div>
+    <div id="mini_pane">
+        <img src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Menu2-512.png" id="hamburger_mini" class="burger">
+    </div>
+    <div id="map"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <script async defer src="{{url_for('static', filename='app.js')}}"></script>
+    <script async defer
+     src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDXZFT4MMcatZAXfWycb_JY5ojejFrAXDA&callback=MapView.init">
+ </script>
+ <script>
+    var myPlaces = function getPlaces() {
+        var x = ({{myArray|safe}});
+        //console.log(x[0].name);
+        return x;
+    }
+</script>
+</body>
+</html>
